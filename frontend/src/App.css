@@ -1,0 +1,294 @@
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: left;
+}
+
+/* ============ GLOBAL ANIMATIONS ============ */
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Slide up animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide down animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scale bounce animation */
+@keyframes scaleBounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Glow pulse animation */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.8);
+  }
+}
+
+/* Shimmer effect */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Float animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Gradient animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Rotate 360 animation */
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Pulse animation for elements */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ============ UTILITY CLASSES ============ */
+
+/* Apply fade-in animation */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Apply slide-up animation */
+.animate-slide-up {
+  animation: slideUp 0.8s ease-out;
+}
+
+/* Apply slide-down animation */
+.animate-slide-down {
+  animation: slideDown 0.8s ease-out;
+}
+
+/* Apply bounce animation */
+.animate-bounce-scale {
+  animation: scaleBounce 2s ease-in-out infinite;
+}
+
+/* Apply glow effect */
+.animate-glow {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* Float effect */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Delayed pulse animation */
+.delay-1000 {
+  animation-delay: 1s;
+}
+
+.delay-500 {
+  animation-delay: 0.5s;
+}
+
+/* ============ INPUT ENHANCEMENTS ============ */
+
+/* Focus glow effect for inputs */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* Smooth transitions for input elements */
+input,
+select,
+textarea {
+  transition: all 0.3s ease;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+/* ============ BUTTON ENHANCEMENTS ============ */
+
+/* Button base animations */
+button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Gradient button effect */
+.btn-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+}
+
+/* ============ CARD EFFECTS ============ */
+
+/* Glassmorphism card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Card hover lift effect */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ============ TYPOGRAPHY ANIMATIONS ============ */
+
+/* Heading animations */
+h1, h2, h3, h4, h5, h6 {
+  transition: all 0.3s ease;
+}
+
+/* ============ SCROLL ANIMATIONS ============ */
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ============ RESPONSIVE ANIMATIONS ============ */
+
+/* Reduce animations on mobile */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  #root {
+    padding: 0;
+  }
+  
+  button {
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+/* ============ LEGACY LOGO ANIMATIONS ============ */
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}

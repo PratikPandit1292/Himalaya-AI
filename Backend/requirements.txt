@@ -1,0 +1,14 @@
+flask
+flask-cors
+flask-sqlalchemy
+flask-jwt-extended
+bcrypt
+python-dotenv
+google-generativeai
+requests
+shap
+fpdf2
+joblib
+pandas
+scikit-learn
+numpy

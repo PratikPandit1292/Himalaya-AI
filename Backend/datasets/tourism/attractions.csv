@@ -1,0 +1,64 @@
+place_name,district,region,category,distance_from_gangtok_km,visit_duration_hours,altitude_m,avg_cost,popularity_score,best_time,description
+MG Marg,Gangtok,Gangtok,Culture,0,2.0,1650,300,95,All Year,Popular pedestrian shopping street.
+Ridge Park,Gangtok,Gangtok,Nature,2,1.5,1700,200,75,All Year,Landscaped park with views.
+Ganesh Tok,Gangtok,Gangtok,Photography,7,1.5,1950,300,85,All Year,Panoramic viewpoint.
+Hanuman Tok,Gangtok,Gangtok,Spiritual,9,2.0,2194,300,88,All Year,Temple with mountain vistas.
+Tashi View Point,Gangtok,Gangtok,Photography,8,1.5,2000,200,82,Oct-May,Sunrise viewpoint.
+Enchey Monastery,Gangtok,Gangtok,Spiritual,3,2.0,1900,200,78,All Year,Historic monastery.
+Rumtek Monastery,Gangtok,Gangtok,Spiritual,24,3.0,1500,300,90,All Year,Major Buddhist monastery.
+Banjhakri Falls,Gangtok,Gangtok,Nature,8,2.0,1700,400,76,All Year,Waterfall and eco-park.
+Namgyal Institute of Tibetology,Gangtok,Gangtok,Culture,3,2.0,1650,250,72,All Year,Tibetan heritage museum.
+Flower Exhibition Centre,Gangtok,Gangtok,Family,1,1.0,1650,150,65,Mar-Jun,Seasonal flowers.
+Gangtok Ropeway,Gangtok,Gangtok,Family,2,1.0,1700,500,84,All Year,Cable car experience.
+Do Drul Chorten,Gangtok,Gangtok,Spiritual,3,1.5,1650,200,74,All Year,Buddhist stupa.
+Himalayan Zoological Park,Gangtok,Gangtok,Family,12,3.0,1780,400,73,All Year,Wildlife park.
+Bakthang Waterfall,Gangtok,Gangtok,Nature,5,1.0,1700,100,60,All Year,Scenic waterfall.
+Lingdum Monastery,Gangtok,Gangtok,Spiritual,20,2.0,1400,250,68,All Year,Peaceful monastery.
+Tsomgo Lake,East Sikkim,East,Nature,38,4.0,3753,1500,98,Mar-Jun,Famous glacial lake.
+Nathula Pass,East Sikkim,East,Adventure,55,5.0,4310,2500,99,Apr-Oct,Historic border pass.
+Kupup Lake,East Sikkim,East,Nature,60,2.0,3900,300,70,Apr-Oct,Heart-shaped alpine lake.
+Baba Mandir,East Sikkim,East,Spiritual,52,2.0,4000,300,88,Apr-Oct,Popular shrine.
+Zuluk,East Sikkim,East,Road Trip,92,6.0,2865,1200,90,Sep-Nov,Famous zig-zag roads.
+Lungthung View Point,East Sikkim,East,Photography,88,1.5,4000,100,78,Apr-Oct,High altitude viewpoint.
+Thambi View Point,East Sikkim,East,Photography,85,1.5,3415,100,80,Sep-Nov,Views of Zuluk loops.
+Aritar Lake,East Sikkim,East,Family,110,2.0,1400,300,72,All Year,Boating destination.
+Rolep Valley,East Sikkim,East,Nature,120,4.0,1800,500,45,All Year,Hidden valley.
+Menmecho Lake,East Sikkim,East,Nature,62,3.0,3800,500,65,Apr-Oct,Remote alpine lake.
+Padamchen,East Sikkim,East,Road Trip,80,2.0,2100,300,58,All Year,Scenic village.
+Rongli,East Sikkim,East,Culture,95,2.0,1500,200,55,All Year,Gateway town.
+Ravangla,South Sikkim,South,Nature,70,4.0,2100,1000,88,All Year,Scenic hill town.
+Buddha Park,South Sikkim,South,Spiritual,72,3.0,2100,500,92,All Year,Massive Buddha statue.
+Temi Tea Garden,South Sikkim,South,Photography,65,3.0,1400,500,85,Oct-May,Tea estate.
+Namchi,South Sikkim,South,Culture,78,4.0,1675,800,84,All Year,Cultural center.
+Samdruptse Hill,South Sikkim,South,Spiritual,80,2.0,2134,300,78,All Year,Guru statue.
+Char Dham,South Sikkim,South,Spiritual,82,3.0,1800,500,90,All Year,Pilgrimage complex.
+Borong,South Sikkim,South,Nature,90,3.0,1800,400,60,All Year,Village getaway.
+Maenam Hill,South Sikkim,South,Adventure,88,5.0,3130,700,70,Oct-May,Trekking peak.
+Ralang Monastery,South Sikkim,South,Spiritual,95,2.0,2100,250,67,All Year,Historic monastery.
+Sikip,South Sikkim,South,Nature,75,2.0,1500,200,52,All Year,Quiet countryside.
+Tendong Hill,South Sikkim,South,Adventure,92,5.0,2600,500,65,Oct-May,Forest trek.
+Yangang,South Sikkim,South,Culture,85,2.0,1700,200,55,All Year,Small town experience.
+Pelling,West Sikkim,West,Nature,115,6.0,2150,1500,95,Oct-May,Top destination.
+Sky Walk Pelling,West Sikkim,West,Adventure,117,2.0,2200,500,88,All Year,Glass skywalk.
+Kanchenjunga Falls,West Sikkim,West,Nature,125,2.0,2200,300,85,All Year,Large waterfall.
+Pemayangtse Monastery,West Sikkim,West,Spiritual,118,2.0,2085,300,80,All Year,Ancient monastery.
+Khecheopalri Lake,West Sikkim,West,Spiritual,145,3.0,1700,300,82,All Year,Sacred lake.
+Yuksom,West Sikkim,West,Culture,125,4.0,1780,600,80,Oct-May,First capital.
+Singshore Bridge,West Sikkim,West,Adventure,135,2.0,1900,200,74,All Year,Suspension bridge.
+Dentam Valley,West Sikkim,West,Nature,150,3.0,1600,300,55,All Year,Valley views.
+Uttarey,West Sikkim,West,Adventure,165,4.0,2000,500,58,Oct-May,Trekking hub.
+Darap Village,West Sikkim,West,Culture,120,2.0,1600,200,50,All Year,Village tourism.
+Rimbi Waterfall,West Sikkim,West,Nature,130,1.5,1900,150,68,All Year,Scenic waterfall.
+Sewaro Rock Garden,West Sikkim,West,Family,122,2.0,1800,200,62,All Year,Family picnic spot.
+Lachung,North Sikkim,North,Nature,118,6.0,2700,1500,92,Apr-Jun,Mountain village.
+Yumthang Valley,North Sikkim,North,Nature,145,5.0,3564,2000,99,Apr-Jun,Valley of Flowers.
+Zero Point,North Sikkim,North,Adventure,170,4.0,4600,1500,95,Apr-Jun,Snow destination.
+Lachen,North Sikkim,North,Nature,130,5.0,2750,1200,88,Apr-Jun,Scenic settlement.
+Gurudongmar Lake,North Sikkim,North,Photography,190,5.0,5430,3000,100,Apr-Jun,High altitude lake.
+Singhik View Point,North Sikkim,North,Photography,105,2.0,1560,200,70,All Year,Mountain views.
+Seven Sisters Waterfall,North Sikkim,North,Nature,95,1.5,1500,100,72,All Year,Multi-tier waterfall.
+Chungthang,North Sikkim,North,Culture,110,2.0,1700,200,55,All Year,Historic town.
+Shingba Rhododendron Sanctuary,North Sikkim,North,Nature,150,3.0,3000,300,76,Apr-May,Rhododendron blooms.
+Thangu Valley,North Sikkim,North,Adventure,180,3.0,3900,800,82,Apr-Jun,High altitude valley.
+Kala Patthar,North Sikkim,North,Photography,175,2.0,4200,500,85,Apr-Jun,Snow landscapes.
+Green Lake Trek,North Sikkim,North,Adventure,210,8.0,5000,2500,78,Oct-Nov,Advanced trek.
