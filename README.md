@@ -208,18 +208,18 @@ Uses Groq LLM to generate personalized travel plans.
 
 ## AI Travel Assistant
 
-![AI Chatbot](screenshots/ChatBot_1.png)
+![AI Chatbot](Screenshots/ChatBot_1.png)
 
 ## AI Itinerary Generator
 
-![Itinerary](screenshots/Plan_Trip_1.png)
-![Itinerary](screenshots/Plan_Trip_2.png)
-![Itinerary](screenshots/Plan_Trip_3.png)
-![Itinerary](screenshots/Plan_Trip_4.png)
-![Itinerary](screenshots/Plan_Trip_5.png)
-![Itinerary](screenshots/Plan_Trip_6.png)
-![Itinerary](screenshots/Plan_Trip_7.png)
-![Itinerary](screenshots/Plan_Trip_8.png)
+![Itinerary](Screenshots/Plan_Trip_1.png)
+![Itinerary](Screenshots/Plan_Trip_2.png)
+![Itinerary](Screenshots/Plan_Trip_3.png)
+![Itinerary](Screenshots/Plan_Trip_4.png)
+![Itinerary](Screenshots/Plan_Trip_5.png)
+![Itinerary](Screenshots/Plan_Trip_6.png)
+![Itinerary](Screenshots/Plan_Trip_7.png)
+![Itinerary](Screenshots/Plan_Trip_8.png)
 
 ---
 
