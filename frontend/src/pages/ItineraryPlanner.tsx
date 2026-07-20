@@ -500,6 +500,39 @@ export default function ItineraryPlanner() {
       </div>
     )}
 
+    {details.predicted_crowd_level && (
+      <div
+        className={`flex items-center gap-2 px-4 py-2 rounded-xl border ${
+          details.predicted_crowd_level === "High"
+            ? "bg-red-500/10 border-red-400/20"
+            : details.predicted_crowd_level === "Medium"
+            ? "bg-yellow-500/10 border-yellow-400/20"
+            : "bg-green-500/10 border-green-400/20"
+        }`}
+      >
+        <span
+          className={`w-1.5 h-1.5 rounded-full ${
+            details.predicted_crowd_level === "High"
+              ? "bg-red-400 animate-pulse"
+              : details.predicted_crowd_level === "Medium"
+              ? "bg-yellow-400"
+              : "bg-green-400"
+          }`}
+        />
+        <span
+          className={`text-sm font-medium ${
+            details.predicted_crowd_level === "High"
+              ? "text-red-300"
+              : details.predicted_crowd_level === "Medium"
+              ? "text-yellow-300"
+              : "text-green-300"
+          }`}
+        >
+          {details.predicted_crowd_level} Crowd
+        </span>
+      </div>
+    )}
+
   </div>
 
 </div>
@@ -512,35 +545,51 @@ export default function ItineraryPlanner() {
                       </div>
                     )}
 
-                    <div className="space-y-3">
-                      {details.places.map((place: any, index: number) => (
-                        <div
-                          key={index}
-                          className="bg-white/5 rounded-xl p-4 border border-white/10 hover:border-cyan-400/30 transition-colors"
-                        >
-                          <div className="flex items-start justify-between">
-                            <h4 className="text-white font-semibold text-lg">
-                              📍 {place.place_name}
-                            </h4>
-                            <span className="text-xs bg-white/10 text-white/60 px-3 py-1 rounded-full">
-                              {place.visit_duration_hours}h
-                            </span>
+                    {details.crowd_advisory && (
+                      <div className="mb-6 rounded-2xl overflow-hidden bg-gradient-to-r from-red-500/10 via-orange-500/10 to-amber-500/10 border border-orange-400/20">
+                        <div className="p-5 flex gap-4 items-start">
+                          <div className="shrink-0 w-10 h-10 rounded-xl bg-orange-500/15 border border-orange-400/30 flex items-center justify-center text-lg">
+                            🔮
                           </div>
-                          <p className="text-cyan-300 text-sm mt-1">{place.category}</p>
-                          <div className="flex gap-4 mt-1">
-                            <p className="text-green-300 text-sm">💰 ₹{place.avg_cost}</p>
-                            <p className="text-yellow-300 text-sm">🗓 {place.best_time}</p>
-                          </div>
-                          <p className="text-white/70 text-sm mt-2">{place.description}</p>
-                          {place.tip && (
-                            <p className="text-purple-300 text-sm mt-2 flex items-start gap-1.5">
-                              <span className="mt-0.5">★</span>
-                              <span className="italic">{place.tip}</span>
+                          <div className="flex-1">
+                            <p className="text-orange-300 uppercase tracking-[0.2em] text-[10px] font-semibold mb-1.5">
+                              AI Crowd Insight
                             </p>
-                          )}
+                            <p className="text-white/90 text-sm leading-relaxed">
+                              {details.crowd_advisory}
+                            </p>
+                            {details.better_date_suggestion && (
+                              <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 border border-white/20">
+                                <span className="text-white/50 text-xs">Better date</span>
+                                <span className="text-orange-300 text-xs font-semibold">
+                                  {details.better_date_suggestion}
+                                </span>
+                              </div>
+                            )}
+                          </div>
                         </div>
-                      ))}
-                    </div>
+                      </div>
+                    )}
+
+                    {details.schedule_narrative ? (
+                      <div className="p-5 rounded-xl bg-white/5 border border-white/10">
+                        <p className="text-white/85 leading-relaxed text-[15px]">
+                          {details.schedule_narrative}
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="space-y-3">
+                        {details.places.map((place: any, index: number) => (
+                          <div
+                            key={index}
+                            className="bg-white/5 rounded-xl p-4 border border-white/10 hover:border-cyan-400/30 transition-colors"
+                          >
+                            <h4 className="text-white font-semibold text-lg">📍 {place.place_name}</h4>
+                            <p className="text-green-300 text-sm mt-1">💰 ₹{place.avg_cost}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </motion.div>
                 ))}
               </div>

@@ -1,19 +1,15 @@
 import os
-import json
 import requests
-import pandas as pd
-from pathlib import Path
 from datetime import datetime
 from openai import OpenAI
+from rag.retriever import retrieve_context
 
 client = OpenAI(
     api_key=os.getenv("GROQ_API_KEY"),
     base_url="https://api.groq.com/openai/v1"
 )
 
-DATASET_PATH = Path("datasets/tourism/attractions.csv")
-
-# ── System prompt with full Sikkim context ────────────────────
+# ── System prompt - now takes RETRIEVED context, not the whole dataset ──
 SYSTEM_PROMPT = """
 You are SikkimAI, an expert travel planner and tourism consultant for Sikkim.
 
@@ -37,29 +33,19 @@ For honeymoon trips:
 - Prioritize scenic places, viewpoints, monasteries, lakes, cafes and romantic experiences.
 - Recommend comfortable hotels and sunset viewpoints.
 
-Use the attractions dataset as your primary source.
+Today's date: {today}
+Current season in Sikkim: {season}
+
+Relevant attractions retrieved for this specific question (this is NOT the
+full database - only the places most relevant to what the user just asked):
+{retrieved_context}
+
+Only use the retrieved attractions above as your factual source for places,
+costs, altitude, and best-time info. If the retrieved list doesn't cover
+what the user asked, say so honestly rather than inventing details.
 
 Keep responses well structured using markdown.
 """
-_attractions_context_cache = None
-
-
-def _load_attractions_context() -> str:
-    global _attractions_context_cache
-    if _attractions_context_cache:
-        return _attractions_context_cache
-
-    try:
-        df = pd.read_csv(DATASET_PATH)
-        summary = df[[
-            "place_name", "region", "category",
-            "best_time", "avg_cost", "altitude_m", "description"
-        ]].to_dict(orient="records")
-        _attractions_context_cache = json.dumps(summary, indent=2)
-    except Exception:
-        _attractions_context_cache = "Attractions data unavailable."
-
-    return _attractions_context_cache
 
 
 def _get_season() -> str:
@@ -74,7 +60,7 @@ def _get_season() -> str:
         return "Autumn (post-monsoon, crystal clear skies, best trekking season)"
 
 
-def _call_groq(messages):
+def _call_groq(messages, retrieved_context: str):
 
     try:
 
@@ -84,7 +70,7 @@ def _call_groq(messages):
                 {
                     "role": "system",
                     "content": SYSTEM_PROMPT.format(
-                        attractions_context=_load_attractions_context(),
+                        retrieved_context=retrieved_context,
                         today=datetime.now().strftime("%B %d, %Y"),
                         season=_get_season()
                     )
@@ -122,6 +108,8 @@ def _smart_fallback(message: str) -> str:
 
 
 def get_chat_response(message: str, history: list) -> tuple[str, str]:
+    original_message = message
+
     if "itinerary" in message.lower() or "trip" in message.lower():
         message = f"""
             Generate a complete travel itinerary.
@@ -137,34 +125,31 @@ def get_chat_response(message: str, history: list) -> tuple[str, str]:
 """
     """
     Returns (response_text, powered_by).
-    Tries Groq first, falls back to rule-based.
+    Tries Groq (grounded with retrieved context) first, falls back to rule-based.
     """
-    # Build conversation with history
-    messages = []
+    # RAG step: retrieve only the attractions relevant to THIS message,
+    # instead of stuffing every attraction in the dataset into the prompt.
+    retrieved_context, sources = retrieve_context(original_message, k=5)
+    if sources:
+        print(f"[RAG] Retrieved for \"{original_message[:60]}\": {sources}")
 
+    # Build conversation with history (note: the previous version appended
+    # the current message once per history item, duplicating it several
+    # times - fixed here to append it exactly once, after the history).
+    messages = []
     for h in history[-8:]:
         role = h.get("role", "user")
         content = h.get("content", "")
+        messages.append({
+            "role": "user" if role == "user" else "assistant",
+            "content": content
+        })
+    messages.append({"role": "user", "content": message})
 
-        if role == "user":
-            messages.append({
-                "role": "user",
-                "content": content
-            })
-
-        else:
-            messages.append({
-                "role": "assistant",
-                "content": content
-            })
-
-        messages.append({"role": "user", "content": message})
-
-    # Try Gemini
-    groq_response = _call_groq(messages)
+    groq_response = _call_groq(messages, retrieved_context)
 
     if groq_response:
-        return groq_response, "groq"
+        return groq_response, "groq+rag"
 
     # Smart fallback
     return _smart_fallback(message), "fallback"

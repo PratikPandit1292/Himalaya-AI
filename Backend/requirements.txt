@@ -12,3 +12,7 @@ joblib
 pandas
 scikit-learn
 numpy
+openai
+langchain-groq
+langgraph
+chromadb

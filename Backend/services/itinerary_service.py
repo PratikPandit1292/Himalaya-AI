@@ -220,32 +220,37 @@ def estimate_trip_cost(days, people, attractions):
 # Falls back gracefully to rich rule-based generator
 # ============================================================
 
-def generate_llm_itinerary(days, people, interests, source_city="", start_date=None):
+def generate_llm_itinerary(days, people, interests, source_city="", start_date=None, attractions_context=None):
 
     try:
 
-        df = load_attractions()
+        # If the caller already retrieved a relevant set of attractions
+        # (e.g. the RAG-powered itinerary agent), use that. Otherwise,
+        # fall back to the original full-dataset-then-filter approach,
+        # so any other caller of this function keeps working unchanged.
+        if attractions_context is None:
+            df = load_attractions()
 
-        filtered = df[df["category"].isin(interests)]
+            filtered = df[df["category"].isin(interests)]
 
-        if len(filtered) == 0:
-            filtered = df.copy()
+            if len(filtered) == 0:
+                filtered = df.copy()
 
-        filtered = filtered.sort_values(
-            by="popularity_score",
-            ascending=False
-        ).head(30)
+            filtered = filtered.sort_values(
+                by="popularity_score",
+                ascending=False
+            ).head(30)
 
-        attractions_context = filtered[
-            [
-                "place_name",
-                "region",
-                "category",
-                "description",
-                "best_time",
-                "avg_cost"
-            ]
-        ].to_dict(orient="records")
+            attractions_context = filtered[
+                [
+                    "place_name",
+                    "region",
+                    "category",
+                    "description",
+                    "best_time",
+                    "avg_cost"
+                ]
+            ].to_dict(orient="records")
 
         prompt = f"""
 You are an expert Sikkim travel planner.

@@ -1,25 +1,98 @@
 # 🏔️ Himalaya AI
-### Smart Tourism Prediction & AI Travel Planning Platform for Sikkim
+## Smart Tourism Prediction & Agentic AI Travel Planning Platform for Sikkim
 
-Himalaya AI is an intelligent tourism platform that combines Machine Learning, Artificial Intelligence, and Real-Time Weather Data to help travelers make smarter travel decisions in Sikkim.
+Himalaya AI is a full-stack **Agentic AI tourism platform** that helps travelers make smarter travel decisions using **Machine Learning, Retrieval-Augmented Generation (RAG), LangGraph agents, and real-time weather data**.
 
-The platform predicts tourist crowd levels, provides weather-aware travel recommendations, generates AI-powered itineraries, discovers hidden gems, and offers an interactive travel assistant.
+Instead of providing static travel information, the platform predicts tourist crowd levels, generates AI-powered itineraries, recommends better travel dates, discovers hidden gems, and answers travel questions using a RAG-powered assistant grounded in a vector database of Sikkim attractions.
 
 ---
 
-# ✨ Key Features
+# 🚀 Features
 
-## 🤖 AI Travel Assistant
-- Powered by Groq Llama 3.3 70B
+## 🤖 RAG-Powered AI Travel Assistant
+
+- Powered by **Groq Llama 3.3 70B**
+- Uses **ChromaDB** for Retrieval-Augmented Generation (RAG)
+- Retrieves only the most relevant attractions
 - Destination-specific travel guidance
 - Permit information
-- Travel tips and recommendations
-- Answers tourism-related questions about Sikkim
+- Travel recommendations
+- Local travel tips
 
 ---
 
-## 📈 Crowd Forecasting System
-Machine Learning powered crowd prediction for tourist destinations.
+## 🧭 Agentic AI Itinerary Generator
+
+A multi-step **LangGraph** workflow instead of a single LLM prompt.
+
+```text
+Retrieve
+   ↓
+Draft Itinerary
+   ↓
+Map Travel Dates
+   ↓
+Predict Crowd Levels
+   ↓
+Revise (if needed)
+   ↓
+Finalize
+```
+
+### Workflow
+
+#### 1. Retrieve
+- Searches the Chroma vector database
+- Retrieves attractions matching traveler interests
+
+#### 2. Draft
+- Generates a personalized itinerary
+- Creates day-wise travel plans
+
+#### 3. Crowd Check
+- Evaluates every travel day using the ML crowd prediction model
+
+#### 4. Revise
+If a day is predicted to have **High Crowd**, the agent:
+- Searches nearby dates
+- Finds a better alternative
+- Generates an AI recommendation
+
+#### 5. Finalize
+Produces:
+- AI Trip Title
+- Trip Overview
+- Narrative Day Schedule
+- Crowd Badges
+- Crowd Insights
+- Suggested Alternate Dates
+- Cost Estimate
+- Hidden Gems
+- Travel Tips
+
+---
+
+## 🧠 Crowd Advisor Agent
+
+```text
+Predict Crowd
+      ↓
+Explain Prediction
+      ↓
+Search Nearby Dates
+      ↓
+Recommend Better Date
+```
+
+Features:
+- Crowd prediction
+- AI explanation
+- Nearby date recommendation
+- Travel advice
+
+---
+
+## 📈 Crowd Forecasting
 
 Predicts:
 - 🟢 Low Crowd
@@ -27,12 +100,12 @@ Predicts:
 - 🔴 High Crowd
 
 Uses:
+- Destination
 - Month
-- Weekend Information
-- Holiday Data
-- Tourist Destination
-- Weather Patterns
-- Historical Tourism Trends
+- Weekend
+- Holiday
+- Weather
+- Historical tourism trends
 
 Provides:
 - Crowd Forecast
@@ -41,75 +114,111 @@ Provides:
 
 ---
 
-## 🌦️ Real-Time Weather Integration
-Integrated Weather API provides:
+## 🌦️ Real-Time Weather
 
-- Live Weather Conditions
-- Temperature Information
-- Weather Forecast Insights
-- Weather-aware Travel Suggestions
+Powered by **Open-Meteo API**
 
-This improves the accuracy of travel recommendations and planning.
-
----
-
-## 🗺️ AI Itinerary Generator
-
-Generate personalized travel plans based on:
-
-- Number of Days
-- Number of Travelers
-- Travel Interests
-- Source City
-- Travel Date
-
-Features:
-- AI Generated Trip Title
-- AI Generated Trip Overview
-- Day-wise Travel Plan
-- Cost Estimation
-- Hidden Gem Discovery
-- Personalized Travel Tips
+- Live weather
+- Temperature
+- Forecast
+- Weather-aware travel suggestions
 
 ---
 
 ## 🚗 Smart Route Planner
 
-Users enter their source city and the platform generates:
-
-- Recommended Travel Mode
-- Travel Route
-- Travel Duration
-- Travel Advice
-
 Example:
 
-Delhi → Bagdogra Airport → Gangtok
+```text
+Delhi
+   ↓
+Bagdogra Airport
+   ↓
+Gangtok
+```
+
+Provides:
+- Recommended route
+- Travel duration
+- Travel mode
+- Travel advice
 
 ---
 
-## 💎 Hidden Gem Recommendation System
+## 💎 Hidden Gem Recommendation
 
 Recommends lesser-known attractions based on:
-
-- User Interests
-- Popularity Score
-- Destination Category
-
-Promotes exploration beyond mainstream tourist locations.
+- User interests
+- Popularity score
+- Destination category
 
 ---
 
 ## 📄 PDF Export
 
-Export generated itineraries into downloadable PDF format.
+Exports complete itineraries containing:
+- Trip overview
+- Day-wise itinerary
+- Cost summary
+- Hidden gem recommendation
+- Travel tips
 
-Includes:
-- Trip Overview
-- Day-wise Plan
-- Cost Summary
-- Hidden Gem Recommendation
-- Travel Tips
+---
+
+# 🏗️ System Architecture
+
+```text
+                    User
+                      │
+          React + TypeScript Frontend
+                      │
+                  Flask Backend
+                      │
+      ┌───────────────┼────────────────┐
+      │               │                │
+ LangGraph        Crowd ML        Weather API
+   Agents          Models         Open-Meteo
+      │
+      │
+ ChromaDB (RAG)
+      │
+ Groq Llama 3.3
+```
+
+---
+
+# 🧠 AI & Machine Learning Modules
+
+## Crowd Prediction
+- Random Forest Classifier
+- Tourism + weather based crowd prediction
+
+## Weather Module
+Provides weather-aware recommendations.
+
+## RAG Retrieval
+- Chunks attractions dataset
+- Creates embeddings
+- Stores vectors in ChromaDB
+- Retrieves only relevant context
+
+Dataset:
+- 83 Attractions
+- Gangtok
+- East Sikkim
+- South Sikkim
+- West Sikkim
+- North Sikkim
+
+## Itinerary Agent
+```text
+Retrieve → Draft → Crowd Check → Revise → Finalize
+```
+
+## Crowd Advisor Agent
+```text
+Predict → Explain → Nearby Date Search → Recommend
+```
 
 ---
 
@@ -123,20 +232,24 @@ Includes:
 - Framer Motion
 
 ## Backend
-- Flask
 - Python
+- Flask
+
+## Agentic AI
+- LangGraph
+- LangChain
+- Groq API
+- Llama 3.3 70B
+- ChromaDB
 
 ## Machine Learning
 - Scikit-Learn
 - Random Forest Classifier
 - Random Forest Regressor
-
-## AI
-- Groq API
-- Llama 3.3 70B Versatile
+- SHAP
 
 ## APIs
-- Weather API (Real-Time Weather Integration)
+- Open-Meteo API
 
 ## Database
 - SQLite
@@ -145,8 +258,14 @@ Includes:
 
 # 📂 Project Structure
 
+```text
 Backend/
-│
+├── agents/
+│   ├── crowd_advisor/
+│   └── itinerary_agent/
+├── rag/
+│   ├── build_index.py
+│   └── retriever.py
 ├── controllers/
 ├── routes/
 ├── services/
@@ -156,75 +275,77 @@ Backend/
 └── app.py
 
 Frontend/
-│
 ├── src/
-│ ├── pages/
-│ ├── components/
-│ ├── services/
-│ └── assets/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   └── assets/
 └── vite.config.ts
+```
 
 ---
 
-# 🧠 Machine Learning Modules
-
-### Crowd Prediction Model
-Predicts future crowd levels using tourism and weather data.
-
-### Weather Prediction Module
-Provides weather-aware recommendations.
-
-### AI Itinerary Generation
-Uses Groq LLM to generate personalized travel plans.
-
----
-
-# 🚀 Future Enhancements
+# 📈 Future Enhancements
 
 - Multi-State Tourism Support
 - User Accounts & Saved Trips
 - Flight & Train Integration
 - Hotel Recommendation System
-- Explainable AI for Crowd Predictions
+- Explainable AI Dashboard
 - Live Event & Festival Recommendations
+- Per-attraction crowd prediction
 
 ---
 
+# 📷 Screenshots
 
-# 📷 Add Screenshots In README
+## 🏠 Home
 
-## Home Page
+```md
+![Home](Screenshots/Home_page_1.png)
+![Home](Screenshots/Home_page_2.png)
+```
 
-![Home Page](Screenshots/Home_page_1.png)
-![Home Page](Screenshots/Home_page_2.png)
+## 📈 Crowd Forecast
 
-## Crowd Forecast
+```md
+![Crowd](Screenshots/Crowd_Forecast_1.png)
+![Crowd](Screenshots/Crowd_Forecast_2.png)
+![Crowd](Screenshots/Crowd_Forecast_3.png)
+![Crowd](Screenshots/Crowd_Forecast_4.png)
+```
 
-![Crowd Forecast](Screenshots/Crowd_Forecast_1.png)
-![Crowd Forecast](Screenshots/Crowd_Forecast_2.png)
-![Crowd Forecast](Screenshots/Crowd_Forecast_3.png)
-![Crowd Forecast](Screenshots/Crowd_Forecast_4.png)
+## 🤖 AI Travel Assistant
 
+```md
+![Chatbot](Screenshots/ChatBot_1.png)
+![Chatbot](Screenshots/ChatBot_2.png)
+![Chatbot](Screenshots/ChatBot_3.png)
+![Chatbot](Screenshots/ChatBot_4.png)
+![Chatbot](Screenshots/ChatBot_5.png)
+![Chatbot](Screenshots/ChatBot_6.png)
+![Chatbot](Screenshots/ChatBot_7.png)
 
-## AI Travel Assistant
+```
 
-![AI Chatbot](Screenshots/ChatBot_1.png)
+## 🧭 Agentic AI Itinerary Generator
 
-## AI Itinerary Generator
+```md
+![Plan](Screenshots/Plan_Trip_1.png)
+![Plan](Screenshots/Plan_Trip_2.png)
+![Plan](Screenshots/Plan_Trip_3.png)
+![Plan](Screenshots/Plan_Trip_4.png)
+![Plan](Screenshots/Plan_Trip_5.png)
+![Plan](Screenshots/Plan_Trip_6.png)
 
-![Itinerary](Screenshots/Plan_Trip_1.png)
-![Itinerary](Screenshots/Plan_Trip_2.png)
-![Itinerary](Screenshots/Plan_Trip_3.png)
-![Itinerary](Screenshots/Plan_Trip_4.png)
-![Itinerary](Screenshots/Plan_Trip_5.png)
-![Itinerary](Screenshots/Plan_Trip_6.png)
-![Itinerary](Screenshots/Plan_Trip_7.png)
-![Itinerary](Screenshots/Plan_Trip_8.png)
+```
 
 ---
 
 # 👨‍💻 Author
 
-Developed as a Full-Stack AI Tourism Platform using Machine Learning, LLMs, Weather APIs, and Modern Web Technologies.
+**Pratik Pandit**
 
-Built for smarter travel planning in the Himalayas.
+Full-Stack AI Developer
+
+Built using **LangGraph, Retrieval-Augmented Generation (RAG), Machine Learning, LLMs, Flask, React, TypeScript, and Modern Web Technologies** to enable smarter travel planning across the Himalayas.

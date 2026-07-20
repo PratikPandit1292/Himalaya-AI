@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from services.itinerary_service import generate_complete_itinerary
+from agents.itinerary_agent.graph import run_itinerary_agent
 
 
 def generate_itinerary(data):
@@ -10,7 +10,7 @@ def generate_itinerary(data):
 
     source_city = data.get("source_city", "")
 
-    result = generate_complete_itinerary(
+    result = run_itinerary_agent(
         days=days,
         people=people,
         interests=interests,

@@ -16,6 +16,7 @@ from routes.feedback_routes import feedback_bp
 from routes.auth_routes import auth_bp, user_bp
 from routes.recommendation_routes import recommendation_bp
 from routes.chat_routes import chat_bp
+from routes.advisor_routes import advisor_bp
 
 # Import DB + models
 from models.database import db
@@ -51,6 +52,7 @@ def create_app():
     app.register_blueprint(user_bp)
     app.register_blueprint(recommendation_bp)
     app.register_blueprint(chat_bp)
+    app.register_blueprint(advisor_bp)
 
     # ── Create DB tables ────────────────────────────────────
     with app.app_context():
