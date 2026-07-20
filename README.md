@@ -301,23 +301,23 @@ Frontend/
 
 ## 🏠 Home
 
-```md
+
 ![Home](Screenshots/Home_page_1.png)
 ![Home](Screenshots/Home_page_2.png)
-```
+
 
 ## 📈 Crowd Forecast
 
-```md
+
 ![Crowd](Screenshots/Crowd_Forecast_1.png)
 ![Crowd](Screenshots/Crowd_Forecast_2.png)
 ![Crowd](Screenshots/Crowd_Forecast_3.png)
 ![Crowd](Screenshots/Crowd_Forecast_4.png)
-```
+
 
 ## 🤖 AI Travel Assistant
 
-```md
+
 ![Chatbot](Screenshots/ChatBot_1.png)
 ![Chatbot](Screenshots/ChatBot_2.png)
 ![Chatbot](Screenshots/ChatBot_3.png)
@@ -326,11 +326,11 @@ Frontend/
 ![Chatbot](Screenshots/ChatBot_6.png)
 ![Chatbot](Screenshots/ChatBot_7.png)
 
-```
+
 
 ## 🧭 Agentic AI Itinerary Generator
 
-```md
+
 ![Plan](Screenshots/Plan_Trip_1.png)
 ![Plan](Screenshots/Plan_Trip_2.png)
 ![Plan](Screenshots/Plan_Trip_3.png)
@@ -338,7 +338,7 @@ Frontend/
 ![Plan](Screenshots/Plan_Trip_5.png)
 ![Plan](Screenshots/Plan_Trip_6.png)
 
-```
+
 
 ---
 
