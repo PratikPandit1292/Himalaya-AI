@@ -27,18 +27,15 @@ export const authAPI = {
     });
   },
 
-  saveItinerary: async (token: string, data: any): Promise<{ message: string; id: number }> => {
+  saveItinerary: async (data: any): Promise<{ message: string; id: number }> => {
     return apiFetch("/api/user/itineraries", {
       method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
       body: JSON.stringify(data),
     });
   },
 
-  getSavedItineraries: async (token: string) => {
-    return apiFetch<any[]>("/api/user/itineraries", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+  getSavedItineraries: async () => {
+    return apiFetch<any[]>("/api/user/itineraries");
   },
 };
 

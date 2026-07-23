@@ -13,6 +13,8 @@ import NotFound from "./pages/NotFound";
 
 import Chatbot from "./components/chatbot/Chatbot";
 
+import ProtectedRoute from "./components/ProtectedRoute";
+
 // Scroll to top on route change
 // This handles smooth scrolling to top for a better user experience
 function ScrollToTop() {
@@ -31,31 +33,31 @@ function App() {
       <ScrollToTop />
 
       <Routes>
-        {/* Home */}
+        {/* Home — public */}
         <Route path="/" element={<Home />} />
 
-        {/* Travel Planner */}
-        <Route path="/planner" element={<ItineraryPlanner />} />
+        {/* Everything below requires login */}
+        <Route element={<ProtectedRoute />}>
+          {/* Travel Planner */}
+          <Route path="/planner" element={<ItineraryPlanner />} />
 
-        {/* Crowd Forecasts */}
-        <Route path="/prediction" element={<CrowdPrediction />} />
+          {/* Crowd Forecasts */}
+          <Route path="/prediction" element={<CrowdPrediction />} />
 
-        {/* AI Recommendation Engine */}
-        <Route path="/recommend" element={<SmartRecommend />} />
+          {/* AI Recommendation Engine */}
+          <Route path="/recommend" element={<SmartRecommend />} />
 
-        {/* State Pages */}
-        <Route
-          path="/state/:stateName"
-          element={<StatePage />}
-        />
+          {/* State Pages */}
+          <Route path="/state/:stateName" element={<StatePage />} />
 
-        {/* Location Pages */}
-        <Route
-          path="/state/:stateName/location/:locationName"
-          element={<LocationPage />}
-        />
+          {/* Location Pages */}
+          <Route
+            path="/state/:stateName/location/:locationName"
+            element={<LocationPage />}
+          />
+        </Route>
 
-        {/* 404 */}
+        {/* 404 — public, so broken/unknown links don't redirect to home silently */}
         <Route path="*" element={<NotFound />} />
       </Routes>
 

@@ -3,11 +3,13 @@ import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import AuthModal from "@/components/common/AuthModal";
+import { useAuth } from "@/context/AuthContext";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,62 +50,65 @@ const Navbar = () => {
             >
               Home
             </Link>
-          
-            <Link
-              to="/state/sikkim"
-              className={`font-medium transition-colors duration-300 link-underline ${
-                isScrolled
-                  ? "text-foreground hover:text-primary"
-                  : "text-primary-foreground/90 hover:text-primary-foreground"
-              }`}
-            >
-              Sikkim
-            </Link>
 
-            <Link
-              to="/state/himachal-pradesh"
-              className={`font-medium transition-colors duration-300 link-underline ${
-                isScrolled
-                  ? "text-foreground hover:text-primary"
-                  : "text-primary-foreground/90 hover:text-primary-foreground"
-              }`}
-            >
-              Himachal Pradesh
-            </Link>
+            {isAuthenticated && (
+              <>
+                <Link
+                  to="/state/sikkim"
+                  className={`font-medium transition-colors duration-300 link-underline ${
+                    isScrolled
+                      ? "text-foreground hover:text-primary"
+                      : "text-primary-foreground/90 hover:text-primary-foreground"
+                  }`}
+                >
+                  Sikkim
+                </Link>
 
-            {/* ✅ NEW: PLAN TRIP */}
-            <Link
-              to="/planner"
-              className={`font-medium transition-colors duration-300 link-underline ${
-                isScrolled
-                  ? "text-foreground hover:text-primary"
-                  : "text-primary-foreground/90 hover:text-primary-foreground"
-              }`}
-            >
-              Plan Trip
-            </Link>
+                <Link
+                  to="/state/himachal-pradesh"
+                  className={`font-medium transition-colors duration-300 link-underline ${
+                    isScrolled
+                      ? "text-foreground hover:text-primary"
+                      : "text-primary-foreground/90 hover:text-primary-foreground"
+                  }`}
+                >
+                  Himachal Pradesh
+                </Link>
 
-            <Link
-              to="/prediction"
-              className={`font-medium transition-colors duration-300 link-underline ${
-                isScrolled
-                  ? "text-foreground hover:text-primary"
-                  : "text-primary-foreground/90 hover:text-primary-foreground"
-              }`}
-            >
-              Crowd Forecasts
-            </Link>
+                <Link
+                  to="/planner"
+                  className={`font-medium transition-colors duration-300 link-underline ${
+                    isScrolled
+                      ? "text-foreground hover:text-primary"
+                      : "text-primary-foreground/90 hover:text-primary-foreground"
+                  }`}
+                >
+                  Plan Trip
+                </Link>
 
-            <Link
-              to="/recommend"
-              className={`font-medium transition-colors duration-300 link-underline ${
-                isScrolled
-                  ? "text-foreground hover:text-primary"
-                  : "text-primary-foreground/90 hover:text-primary-foreground"
-              }`}
-            >
-              AI Recommends
-            </Link>
+                <Link
+                  to="/prediction"
+                  className={`font-medium transition-colors duration-300 link-underline ${
+                    isScrolled
+                      ? "text-foreground hover:text-primary"
+                      : "text-primary-foreground/90 hover:text-primary-foreground"
+                  }`}
+                >
+                  Crowd Forecasts
+                </Link>
+
+                <Link
+                  to="/recommend"
+                  className={`font-medium transition-colors duration-300 link-underline ${
+                    isScrolled
+                      ? "text-foreground hover:text-primary"
+                      : "text-primary-foreground/90 hover:text-primary-foreground"
+                  }`}
+                >
+                  AI Recommends
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Auth + Mobile Menu */}
@@ -139,47 +144,74 @@ const Navbar = () => {
           >
             <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
               <Link
-                to="/"
-                className="text-foreground font-medium py-2 hover:text-primary transition-colors"
-              >
-                Home
-              </Link>
+              to="/"
+              className={`font-medium transition-colors duration-300 link-underline ${
+                isScrolled
+                  ? "text-foreground hover:text-primary"
+                  : "text-primary-foreground/90 hover:text-primary-foreground"
+              }`}
+            >
+              Home
+            </Link>
 
-              <Link
-                to="/state/sikkim"
-                className="text-foreground font-medium py-2 hover:text-primary transition-colors"
-              >
-                Sikkim
-              </Link>
+            {isAuthenticated && (
+              <>
+                <Link
+                  to="/state/sikkim"
+                  className={`font-medium transition-colors duration-300 link-underline ${
+                    isScrolled
+                      ? "text-foreground hover:text-primary"
+                      : "text-primary-foreground/90 hover:text-primary-foreground"
+                  }`}
+                >
+                  Sikkim
+                </Link>
 
-              <Link
-                to="/state/himachal-pradesh"
-                className="text-foreground font-medium py-2 hover:text-primary transition-colors"
-              >
-                Himachal Pradesh
-              </Link>
+                <Link
+                  to="/state/himachal-pradesh"
+                  className={`font-medium transition-colors duration-300 link-underline ${
+                    isScrolled
+                      ? "text-foreground hover:text-primary"
+                      : "text-primary-foreground/90 hover:text-primary-foreground"
+                  }`}
+                >
+                  Himachal Pradesh
+                </Link>
 
-              {/* ✅ NEW: PLAN TRIP (Mobile) */}
-              <Link
-                to="/planner"
-                className="text-foreground font-medium py-2 hover:text-primary transition-colors"
-              >
-                Plan Trip
-              </Link>
+                <Link
+                  to="/planner"
+                  className={`font-medium transition-colors duration-300 link-underline ${
+                    isScrolled
+                      ? "text-foreground hover:text-primary"
+                      : "text-primary-foreground/90 hover:text-primary-foreground"
+                  }`}
+                >
+                  Plan Trip
+                </Link>
 
-              <Link
-                to="/prediction"
-                className="text-foreground font-medium py-2 hover:text-primary transition-colors"
-              >
-                Crowd Forecasts
-              </Link>
+                <Link
+                  to="/prediction"
+                  className={`font-medium transition-colors duration-300 link-underline ${
+                    isScrolled
+                      ? "text-foreground hover:text-primary"
+                      : "text-primary-foreground/90 hover:text-primary-foreground"
+                  }`}
+                >
+                  Crowd Forecasts
+                </Link>
 
-              <Link
-                to="/recommend"
-                className="text-foreground font-medium py-2 hover:text-primary transition-colors"
-              >
-                AI Recommends
-              </Link>
+                <Link
+                  to="/recommend"
+                  className={`font-medium transition-colors duration-300 link-underline ${
+                    isScrolled
+                      ? "text-foreground hover:text-primary"
+                      : "text-primary-foreground/90 hover:text-primary-foreground"
+                  }`}
+                >
+                  AI Recommends
+                </Link>
+              </>
+            )}
 
               <div className="pt-2 border-t border-border">
                 <AuthModal />

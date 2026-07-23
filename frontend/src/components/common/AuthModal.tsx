@@ -1,28 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, User, Lock, Mail, Sparkles } from "lucide-react";
-import {
-  authAPI,
-  storeAuth,
-  clearAuth,
-  getStoredUser,
-  getStoredToken,
-  type AuthUser,
-} from "@/services/authAPI";
+import { authAPI, type AuthUser } from "@/services/authAPI";
+import { useAuth } from "@/context/AuthContext";
 
 interface Props {
   onAuthChange?: (user: AuthUser | null, token: string | null) => void;
+  forceOpen?: boolean;
+  onClose?: () => void;
+  hideTrigger?: boolean;
 }
 
-export default function AuthModal({ onAuthChange }: Props) {
-  const [open, setOpen] = useState(false);
+export default function AuthModal({ onAuthChange, forceOpen = false, onClose, hideTrigger = false }: Props) {
+  const [open, setOpen] = useState(forceOpen);
   const [mode, setMode] = useState<"login" | "register">("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [currentUser, setCurrentUser] = useState<AuthUser | null>(getStoredUser());
+  const { user: currentUser, login, logout } = useAuth();
+
+  useEffect(() => {
+    if (forceOpen) setOpen(true);
+  }, [forceOpen]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,10 +38,10 @@ export default function AuthModal({ onAuthChange }: Props) {
         result = await authAPI.login(email, password);
       }
 
-      storeAuth(result.token, result.user);
-      setCurrentUser(result.user);
+      login(result.token, result.user);
       onAuthChange?.(result.user, result.token);
       setOpen(false);
+      onClose?.();
       setEmail("");
       setPassword("");
       setName("");
@@ -52,8 +53,7 @@ export default function AuthModal({ onAuthChange }: Props) {
   };
 
   const handleLogout = () => {
-    clearAuth();
-    setCurrentUser(null);
+    logout();
     onAuthChange?.(null, null);
   };
 
@@ -94,7 +94,7 @@ export default function AuthModal({ onAuthChange }: Props) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setOpen(false)}
+              onClick={() => { setOpen(false); onClose?.(); }}
               className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100]"
             />
 
@@ -110,7 +110,7 @@ export default function AuthModal({ onAuthChange }: Props) {
                 {/* Header */}
                 <div className="relative bg-gradient-to-r from-slate-800 to-slate-900 p-8 pb-6 border-b border-white/10">
                   <button
-                    onClick={() => setOpen(false)}
+                    onClick={() => { setOpen(false); onClose?.(); }}
                     className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors"
                   >
                     <X size={20} />
