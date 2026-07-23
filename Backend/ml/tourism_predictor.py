@@ -3,14 +3,26 @@ from datetime import datetime
 from ml.explainer import explain_prediction
 
 # ==========================
-# LOAD MODELS
+# LAZY-LOADED MODELS
 # ==========================
 
-temperature_model = joblib.load("models/temperature_model.pkl")
-crowd_model = joblib.load("models/crowd_model.pkl")
+_temperature_model = None
+_crowd_model = None
+_spot_encoder = None
+_crowd_encoder = None
 
-spot_encoder = joblib.load("models/spot_encoder.pkl")
-crowd_encoder = joblib.load("models/crowd_encoder.pkl")
+
+def _get_models():
+    """Load all 4 model files only on the first prediction request,
+    not at import time. This avoids loading everything into memory
+    before the server even finishes starting up."""
+    global _temperature_model, _crowd_model, _spot_encoder, _crowd_encoder
+    if _temperature_model is None:
+        _temperature_model = joblib.load("models/temperature_model.pkl")
+        _crowd_model = joblib.load("models/crowd_model.pkl")
+        _spot_encoder = joblib.load("models/spot_encoder.pkl")
+        _crowd_encoder = joblib.load("models/crowd_encoder.pkl")
+    return _temperature_model, _crowd_model, _spot_encoder, _crowd_encoder
 
 # ==========================
 # ALTITUDE MAP
@@ -61,6 +73,7 @@ def get_weather(temp, month):
 # ==========================
 
 def predict_trip(destination, date_str):
+    temperature_model, crowd_model, spot_encoder, crowd_encoder = _get_models()
 
     dt = datetime.strptime(date_str, "%Y-%m-%d")
     month = dt.month
@@ -69,6 +82,7 @@ def predict_trip(destination, date_str):
     altitude = ALTITUDES[destination]
 
     spot_encoded = spot_encoder.transform([destination])[0]
+    # ... rest of the function stays exactly the same
 
     # --------------------
     # TEMP PREDICTION
